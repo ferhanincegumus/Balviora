@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ferhanincegumus.github.io/desktop-tutorial/sitemap.xml
