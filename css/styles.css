@@ -307,8 +307,12 @@ section {
 
 .site-header.is-dark-context:not(.is-scrolled) .brand-mark,
 .site-header.is-dark-context:not(.is-scrolled) .nav-link,
-.site-header.is-dark-context:not(.is-scrolled) .icon-btn {
+.site-header.is-dark-context:not(.is-scrolled) .icon-btn,
+.site-header.is-dark-context:not(.is-scrolled) .nav-cta {
   color: var(--color-cream);
+}
+.site-header.is-dark-context:not(.is-scrolled) .nav-cta {
+  border-color: var(--color-line-inverse);
 }
 
 .brand-mark svg { width: 26px; height: 26px; color: var(--color-gold); }
@@ -527,7 +531,7 @@ section {
 /* Brand Story                                                             */
 /* ---------------------------------------------------------------------- */
 .story {
-  background: var(--color-cream);
+  overflow: hidden;
 }
 
 .story-grid {
@@ -544,7 +548,7 @@ section {
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: linear-gradient(155deg, #EFE7D6 0%, #DCD0B7 45%, #C7B98F 100%);
+  background: linear-gradient(155deg, var(--color-forest-800) 0%, var(--color-forest-900) 100%);
 }
 
 .story-visual__art { position: absolute; inset: 0; }
@@ -571,6 +575,17 @@ section {
   opacity: 0.72;
 }
 
+.story-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-xxl);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--color-forest-900);
+  margin-bottom: 1.5rem;
+}
+.dark-section .story-title { color: var(--color-cream); }
+
 .story-copy p + p { margin-top: 1.25rem; }
 
 .story-pillars {
@@ -594,7 +609,7 @@ section {
 /* Why Bee Products                                                        */
 /* ---------------------------------------------------------------------- */
 .why-bee {
-  background: var(--color-cream-deep);
+  overflow: hidden;
 }
 
 .why-grid {
@@ -764,7 +779,7 @@ section {
 /* ---------------------------------------------------------------------- */
 /* Why Black Sea — map                                                     */
 /* ---------------------------------------------------------------------- */
-.origin { background: var(--color-cream); }
+.origin { overflow: hidden; }
 
 .origin-layout {
   display: grid;
@@ -854,7 +869,7 @@ section {
 /* ---------------------------------------------------------------------- */
 /* Quality Standards                                                       */
 /* ---------------------------------------------------------------------- */
-.quality { background: var(--color-cream-deep); }
+.quality { overflow: hidden; }
 
 .quality-grid {
   display: grid;
@@ -890,7 +905,7 @@ section {
 /* ---------------------------------------------------------------------- */
 /* Vision / Roadmap                                                        */
 /* ---------------------------------------------------------------------- */
-.vision { background: var(--color-cream); overflow: hidden; }
+.vision { overflow: hidden; }
 
 .vision-head {
   display: grid;
@@ -993,7 +1008,7 @@ section {
 /* Email capture                                                           */
 /* ---------------------------------------------------------------------- */
 .capture {
-  background: var(--color-cream-deep);
+  overflow: hidden;
 }
 
 .capture-panel {
@@ -1163,6 +1178,100 @@ section {
 .footer-social svg { width: 15px; height: 15px; }
 
 .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+/* ---------------------------------------------------------------------- */
+/* Dark sections — unify the palette with the hero across the whole page   */
+/* ---------------------------------------------------------------------- */
+.dark-section {
+  background: var(--color-forest-900);
+  color: rgba(250, 246, 238, 0.82);
+}
+
+.dark-section .eyebrow { color: var(--color-gold-light); }
+.dark-section .eyebrow::before { background: var(--color-gold-light); }
+.dark-section .section-head h2 { color: var(--color-cream); }
+.dark-section .section-head p { color: rgba(250, 246, 238, 0.65); }
+.dark-section .lede { color: rgba(250, 246, 238, 0.75); }
+
+/* Brand Story */
+.dark-section .story-copy p { color: rgba(250, 246, 238, 0.72); }
+.dark-section .story-visual__frame { border-color: var(--color-line-inverse); }
+.dark-section .story-visual__caption { color: var(--color-gold-light); opacity: 0.85; }
+.dark-section .story-pillars { border-top-color: var(--color-line-inverse); }
+.dark-section .story-pillar h3 { color: var(--color-cream); }
+.dark-section .story-pillar p { color: rgba(250, 246, 238, 0.6); }
+
+/* Why Bee Products */
+.dark-section .why-grid { background: var(--color-line-inverse); border-color: var(--color-line-inverse); }
+.dark-section .why-card { background: var(--color-forest-900); }
+.dark-section .why-card__icon { color: var(--color-gold-light); }
+.dark-section .why-card h3 { color: var(--color-cream); }
+.dark-section .why-card p { color: rgba(250, 246, 238, 0.62); }
+.dark-section .why-note { color: rgba(250, 246, 238, 0.65); }
+
+/* Origin / Map */
+.map-wrap {
+  background: linear-gradient(160deg, var(--color-forest-800) 0%, var(--color-forest-900) 100%);
+  border-color: var(--color-line-inverse);
+}
+.map-svg .map-land { fill: var(--color-forest-800); }
+.map-svg .map-outline { stroke: var(--color-gold-light); opacity: 0.3; }
+.map-hotspot circle.dot { fill: var(--color-cream); stroke: var(--color-forest-900); }
+.map-hotspot:hover circle.dot,
+.map-hotspot.is-active circle.dot { fill: var(--color-gold); }
+.map-legend button {
+  border-color: var(--color-line-inverse);
+  color: rgba(250, 246, 238, 0.65);
+}
+.map-legend button.is-active,
+.map-legend button:hover {
+  background: var(--color-cream);
+  color: var(--color-forest-900);
+  border-color: var(--color-cream);
+}
+.dark-section .origin-detail__item h3 { color: var(--color-cream); }
+.dark-section .origin-detail__item p { color: rgba(250, 246, 238, 0.68); }
+
+/* Quality Standards */
+.dark-section .quality-card {
+  background: rgba(250, 246, 238, 0.03);
+  border-color: var(--color-line-inverse);
+}
+.dark-section .quality-card h3 { color: var(--color-cream); }
+.dark-section .quality-card p { color: rgba(250, 246, 238, 0.62); }
+
+/* Vision / Roadmap */
+.dark-section .vision-card {
+  background: rgba(250, 246, 238, 0.03);
+  border-color: var(--color-line-inverse);
+  color: var(--color-cream);
+}
+.dark-section .vision-card p { color: rgba(250, 246, 238, 0.6); }
+.dark-section .vision-card.is-live {
+  background: linear-gradient(160deg, rgba(201, 168, 118, 0.18), rgba(201, 168, 118, 0.05));
+  border-color: var(--color-gold);
+}
+.dark-section .vision-card.is-live .vision-card__status { color: var(--color-gold-light); }
+.dark-section .vision-card.is-live p { color: rgba(250, 246, 238, 0.72); }
+.dark-section .vision-track::-webkit-scrollbar-thumb { background: var(--color-line-inverse); }
+
+/* Email Capture */
+.dark-section .capture-panel {
+  background: rgba(250, 246, 238, 0.03);
+  border-color: var(--color-line-inverse);
+}
+.dark-section .capture-panel::before {
+  background: radial-gradient(60% 80% at 50% 0%, rgba(201, 168, 118, 0.14), transparent 65%);
+}
+.dark-section .capture-panel h2 { color: var(--color-cream); }
+.dark-section .email-form input[type="email"] {
+  color: var(--color-ink);
+  border-color: var(--color-line-inverse);
+}
+.dark-section .form-note { color: rgba(250, 246, 238, 0.55); }
+.dark-section .form-success { color: var(--color-cream); }
+.dark-section .form-success svg { color: var(--color-gold-light); }
+.dark-section .capture-trust span { color: rgba(250, 246, 238, 0.6); }
 
 /* ---------------------------------------------------------------------- */
 /* Utility                                                                  */
