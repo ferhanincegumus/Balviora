@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Balviora — The beginning of natural wellness">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F1A16"/>
+      <stop offset="0.5" stop-color="#16261F"/>
+      <stop offset="1" stop-color="#1E322A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.28" r="0.5">
+      <stop offset="0" stop-color="#E0B458" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#E0B458" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="comb" width="56" height="96" patternUnits="userSpaceOnUse" patternTransform="scale(1.6)">
+      <path d="M28 0 56 16 56 48 28 64 0 48 0 16Z M28 64 56 80 56 112 28 128 0 112 0 80Z" fill="none" stroke="#E7C066" stroke-width="0.7" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#comb)" opacity="0.14"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <g transform="translate(96,150)" fill="none">
+    <path d="M0 24 14.5 32.6 14.5 49.4 0 58 -14.5 49.4 -14.5 32.6Z" transform="translate(20,0)" stroke="#E0B458" stroke-width="1.6"/>
+    <path d="M20 33 27 37 27 45 20 49 13 45 13 37Z" fill="#E0B458"/>
+  </g>
+  <text x="150" y="196" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#FAF7F0" letter-spacing="1">Balviora</text>
+
+  <text x="96" y="330" font-family="Georgia, 'Times New Roman', serif" font-size="82" fill="#FAF7F0" font-weight="300">The beginning of</text>
+  <text x="96" y="420" font-family="Georgia, 'Times New Roman', serif" font-size="82" fill="#F0CE82" font-style="italic">natural wellness.</text>
+
+  <text x="98" y="486" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#C9C6BC">Small-batch, laboratory-tested bee products from the Eastern Black Sea.</text>
+  <text x="98" y="556" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#E0B458" letter-spacing="3">FIRST COLLECTION · BLACK SEA BALANCE</text>
+</svg>
