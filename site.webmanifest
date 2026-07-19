@@ -1,0 +1,13 @@
+{
+  "name": "Balviora — Natural Wellness",
+  "short_name": "Balviora",
+  "description": "A premium natural wellness company beginning with small-batch bee products from the Eastern Black Sea.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#14201C",
+  "theme_color": "#14201C",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
