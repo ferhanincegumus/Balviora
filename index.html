@@ -78,6 +78,22 @@
   ]
 }
 </script>
+
+<!--
+  Analytics — not active yet.
+  Once you have a Google Analytics 4 Measurement ID (from analytics.google.com,
+  free), replace G-XXXXXXXXXX below with it and remove the surrounding
+  comment markers on both this block and the matching one at the bottom
+  of every other page (privacy.html, terms.html) to start collecting traffic data.
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
 </head>
 <body>
 
@@ -699,8 +715,8 @@
     <div class="footer-bottom">
       <span>&copy; <span id="year">2026</span> Balviora. All rights reserved.</span>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
       </div>
       <div class="footer-social">
         <a href="https://www.instagram.com/balviora" aria-label="Balviora on Instagram"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
