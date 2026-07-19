@@ -1,0 +1,67 @@
+{
+  "name": "FollowUp",
+  "type": "object",
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "carrier_id": {
+      "type": "string"
+    },
+    "follow_up_number": {
+      "type": "number",
+      "default": 1
+    },
+    "scheduled_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sent_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "email_subject": {
+      "type": "string"
+    },
+    "email_content": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "sent",
+        "completed",
+        "cancelled"
+      ],
+      "default": "scheduled"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "day_7",
+        "day_14",
+        "day_30",
+        "day_3",
+        "custom"
+      ],
+      "default": "day_7"
+    }
+  },
+  "required": [
+    "claim_id",
+    "scheduled_date",
+    "type"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "ClaimDefenseReport",
+  "type": "object",
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "risk_score": {
+      "type": "number"
+    },
+    "claim_strength": {
+      "type": "string",
+      "enum": [
+        "Very Strong",
+        "Strong",
+        "Moderate",
+        "Weak",
+        "Very Weak"
+      ],
+      "default": "Moderate"
+    },
+    "approval_probability": {
+      "type": "number"
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "broker_denial_risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objection": {
+            "type": "string"
+          },
+          "counter": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recommended_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strongest_arguments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_checklist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "present": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "ai_generated_response": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "generated",
+        "ready"
+      ],
+      "default": "generated"
+    }
+  },
+  "required": [
+    "claim_id"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

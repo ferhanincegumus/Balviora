@@ -1,0 +1,202 @@
+{
+  "name": "Load",
+  "type": "object",
+  "properties": {
+    "broker_name": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "customer_phone": {
+      "type": "string",
+      "description": "Customer's phone for SMS/WhatsApp case updates (their only touchpoint \u2014 no portal)."
+    },
+    "load_number": {
+      "type": "string"
+    },
+    "pickup_location": {
+      "type": "string"
+    },
+    "delivery_location": {
+      "type": "string"
+    },
+    "appointment_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrival_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "departure_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "free_detention_hours": {
+      "type": "number"
+    },
+    "detention_rate_per_hour": {
+      "type": "number"
+    },
+    "contract_rate": {
+      "type": "number",
+      "description": "Broker-facing detention rate (what the broker owes, from the rate con). Broker calculations always use this; falls back to detention_rate_per_hour for legacy records."
+    },
+    "total_wait_hours": {
+      "type": "number"
+    },
+    "billable_hours": {
+      "type": "number"
+    },
+    "claim_amount": {
+      "type": "number"
+    },
+    "detention_clause_exists": {
+      "type": "boolean"
+    },
+    "notification_requirements": {
+      "type": "string"
+    },
+    "claim_deadline": {
+      "type": "string"
+    },
+    "required_documents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "clause_text": {
+      "type": "string"
+    },
+    "rate_con_file_url": {
+      "type": "string"
+    },
+    "notified_15min": {
+      "type": "boolean",
+      "default": false
+    },
+    "notified_billing_start": {
+      "type": "boolean",
+      "default": false
+    },
+    "notification_email_subject": {
+      "type": "string"
+    },
+    "notification_email_body": {
+      "type": "string"
+    },
+    "no_clause_email_subject": {
+      "type": "string"
+    },
+    "no_clause_email_body": {
+      "type": "string"
+    },
+    "facility_lat": {
+      "type": "number"
+    },
+    "facility_lng": {
+      "type": "number"
+    },
+    "facility_display": {
+      "type": "string"
+    },
+    "checkin_lat": {
+      "type": "number"
+    },
+    "checkin_lng": {
+      "type": "number"
+    },
+    "checkin_accuracy_m": {
+      "type": "number"
+    },
+    "checkin_method": {
+      "type": "string"
+    },
+    "checkin_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "company_id": {
+      "type": "string"
+    },
+    "driver_id": {
+      "type": "string"
+    },
+    "driver_user_id": {
+      "type": "string"
+    },
+    "driver_name": {
+      "type": "string"
+    },
+    "truck": {
+      "type": "string"
+    },
+    "payout_rate_per_hour": {
+      "type": "number",
+      "description": "Internal driver payout rate \u2014 separate from the broker-facing contract_rate."
+    },
+    "docs_reminder_sent": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "broker_name",
+    "load_number",
+    "free_detention_hours",
+    "detention_rate_per_hour"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.driver_user_id": "{{user.id}}"
+        },
+        {
+          "$and": [
+            {
+              "data.company_id": "{{user.data.company_id}}"
+            },
+            {
+              "data.company_id": {
+                "$exists": true
+              }
+            },
+            {
+              "user_condition": {
+                "role": "dispatcher"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.driver_user_id": "{{user.id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

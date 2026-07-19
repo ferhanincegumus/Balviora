@@ -1,0 +1,47 @@
+{
+  "name": "Missing Document Reminders",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "*/15 * * * *",
+      "one_time_date": null,
+      "timezone": "America/New_York",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "description": "Every 15 minutes: flags loads departed over 1 hour ago with missing BOL/POD, emails the assigned driver, and sets docs_reminder_sent. Calls sendDocReminders with the trigger secret.",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "missing_doc_reminders",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "remind": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "sendDocReminders",
+            "args": {
+              "trigger_secret": "dtr-doc-reminder-9f2c7a1e4b8q"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Eksik belge hat\u0131rlatmalar\u0131",
+            "description": "1 saatten eski departed + eksik BOL/POD"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "name": "PotentialRecovery",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "enum": [
+        "gmail",
+        "outlook",
+        "manual"
+      ],
+      "default": "manual"
+    },
+    "email_id": {
+      "type": "string"
+    },
+    "email_subject": {
+      "type": "string"
+    },
+    "email_snippet": {
+      "type": "string"
+    },
+    "load_number": {
+      "type": "string"
+    },
+    "broker_name": {
+      "type": "string"
+    },
+    "facility": {
+      "type": "string"
+    },
+    "appointment_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrival_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "departure_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "free_detention_hours": {
+      "type": "number",
+      "default": 2
+    },
+    "detention_rate_per_hour": {
+      "type": "number",
+      "default": 50
+    },
+    "detected_wait_hours": {
+      "type": "number"
+    },
+    "billable_hours": {
+      "type": "number"
+    },
+    "estimated_amount": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "reviewed",
+        "claimed",
+        "ignored"
+      ],
+      "default": "new"
+    },
+    "detention_reason": {
+      "type": "string"
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "billable_hours",
+    "estimated_amount"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

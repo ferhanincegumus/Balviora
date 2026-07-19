@@ -1,0 +1,41 @@
+{
+  "name": "CarrierProfile",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string"
+    },
+    "owner_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "number_of_trucks": {
+      "type": "number"
+    },
+    "mc_number": {
+      "type": "string"
+    },
+    "dot_number": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_name"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

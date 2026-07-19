@@ -1,0 +1,207 @@
+{
+  "name": "Claim",
+  "type": "object",
+  "properties": {
+    "load_id": {
+      "type": "string"
+    },
+    "broker_name": {
+      "type": "string"
+    },
+    "broker_contact_email": {
+      "type": "string",
+      "description": "Broker contact email claim emails are delivered to."
+    },
+    "load_number": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "ready_to_send",
+        "sent",
+        "awaiting_response",
+        "followup_required",
+        "approved",
+        "partially_approved",
+        "denied",
+        "paid",
+        "closed"
+      ],
+      "default": "draft"
+    },
+    "email_subject": {
+      "type": "string"
+    },
+    "email_body": {
+      "type": "string"
+    },
+    "email_log": {
+      "type": "array",
+      "description": "Audit log of every send attempt for this claim.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recipient": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "delivered",
+              "failed"
+            ]
+          },
+          "provider_id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "claim",
+              "reply"
+            ]
+          }
+        }
+      }
+    },
+    "inbound_replies": {
+      "type": "array",
+      "description": "Broker replies captured via the inbound webhook; used for idempotency by message_id.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "string"
+          },
+          "email_id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "broker_reply_received_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "pending_reply_subject": {
+      "type": "string",
+      "description": "AI-drafted reply to a broker response; sent only after human approval."
+    },
+    "pending_reply_body": {
+      "type": "string"
+    },
+    "pending_reply_in_reply_to": {
+      "type": "string",
+      "description": "Inbound message_id to thread the approved reply under (In-Reply-To header)."
+    },
+    "claim_amount": {
+      "type": "number"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sent_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_followup_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "next_followup_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "response_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approved_amount": {
+      "type": "number"
+    },
+    "paid_amount": {
+      "type": "number"
+    },
+    "denial_reason": {
+      "type": "string"
+    },
+    "carrier_notes": {
+      "type": "string"
+    },
+    "ai_next_action": {
+      "type": "string"
+    },
+    "broker_response": {
+      "type": "string"
+    },
+    "broker_offer_amount": {
+      "type": "number"
+    },
+    "reminder_sent_7": {
+      "type": "boolean",
+      "default": false
+    },
+    "reminder_sent_14": {
+      "type": "boolean",
+      "default": false
+    },
+    "reminder_sent_30": {
+      "type": "boolean",
+      "default": false
+    },
+    "negotiation_rounds": {
+      "type": "number",
+      "default": 0
+    },
+    "auto_negotiate": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_loop_reply_subject": {
+      "type": "string"
+    },
+    "last_loop_reply_body": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "load_id"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}
