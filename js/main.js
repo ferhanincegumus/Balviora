@@ -254,38 +254,10 @@
     var restart = $('[data-quiz-restart]', quiz);
     if (restart) restart.addEventListener('click', function () {
       answers = []; showStep(0);
-      var msg = $('[data-quiz-msg]', quiz);
-      if (msg) { msg.textContent = ''; msg.className = 'field-note'; }
-      var em = $('#quiz-email', quiz); if (em) em.value = '';
     });
-
-    if (qForm) qForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = $('#quiz-email', quiz);
-      var msg = $('[data-quiz-msg]', quiz);
-      if (!email || !isEmail(email.value)) {
-        if (msg) { msg.textContent = 'Please enter a valid email address.'; msg.className = 'field-note is-err'; }
-        return;
-      }
-      function quizSuccess() {
-        if (msg) { msg.textContent = 'Sent. Check your inbox to confirm — your recommendation is on its way.'; msg.className = 'field-note is-ok'; }
-        email.value = '';
-      }
-      // Submit to Brevo (same endpoint as the waitlist form), then confirm.
-      var wl = doc.querySelector('[data-waitlist]');
-      var endpoint = wl && wl.getAttribute('data-endpoint');
-      if (endpoint) {
-        var fd = new FormData();
-        fd.append('EMAIL', email.value.trim());
-        fd.append('email_address_check', '');
-        fd.append('locale', 'en');
-        fetch(endpoint, { method: 'POST', body: fd, mode: 'no-cors' })
-          .then(quizSuccess)
-          .catch(function () { if (msg) { msg.textContent = 'Something went wrong. Please try again.'; msg.className = 'field-note is-err'; } });
-      } else {
-        quizSuccess();
-      }
-    });
+    // The quiz result routes to the Brevo waitlist form (single source of email capture);
+    // guard against an accidental form submit.
+    if (qForm) qForm.addEventListener('submit', function (e) { e.preventDefault(); });
 
     showStep(0);
   }
