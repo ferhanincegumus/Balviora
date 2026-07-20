@@ -267,9 +267,24 @@
         if (msg) { msg.textContent = 'Please enter a valid email address.'; msg.className = 'field-note is-err'; }
         return;
       }
-      // Integration point: POST { email, recommendation: tally() } to your ESP.
-      if (msg) { msg.textContent = 'Sent. Check your inbox to confirm — your recommendation is on its way.'; msg.className = 'field-note is-ok'; }
-      email.value = '';
+      function quizSuccess() {
+        if (msg) { msg.textContent = 'Sent. Check your inbox to confirm — your recommendation is on its way.'; msg.className = 'field-note is-ok'; }
+        email.value = '';
+      }
+      // Submit to Brevo (same endpoint as the waitlist form), then confirm.
+      var wl = doc.querySelector('[data-waitlist]');
+      var endpoint = wl && wl.getAttribute('data-endpoint');
+      if (endpoint) {
+        var fd = new FormData();
+        fd.append('EMAIL', email.value.trim());
+        fd.append('email_address_check', '');
+        fd.append('locale', 'en');
+        fetch(endpoint, { method: 'POST', body: fd, mode: 'no-cors' })
+          .then(quizSuccess)
+          .catch(function () { if (msg) { msg.textContent = 'Something went wrong. Please try again.'; msg.className = 'field-note is-err'; } });
+      } else {
+        quizSuccess();
+      }
     });
 
     showStep(0);

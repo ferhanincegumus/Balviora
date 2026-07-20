@@ -857,12 +857,16 @@
            or POST to your own webhook. Double opt-in recommended.
            Set data-endpoint to your list URL to enable real submits.
            ============================================================ -->
-      <form class="waitlist-form" data-waitlist data-endpoint="" novalidate>
+      <form class="waitlist-form" data-waitlist data-endpoint="https://16697db2.sibforms.com/serve/MUIFAOk2VWr0KYgImyOyQQcDNhKwZ69u_WqBIrx51rNSdmJvPGCIJ88RZT2dK04Sf4yLBGrK560qohzIBwuTCQ6VVnae4Qi2fihDBcGIvqNW7TSlzZBFkXPZiTcjwwxBqTEvQZxmNCjmv47QzxCLKgExVpTcnMT0Le_ytQypgNYnMPM6d8m6EuOwy-CK0rK0d8Qg61OX31EGjvxpXQ==" novalidate>
         <label for="wl-name" class="sr-only">First name</label>
         <input type="text" id="wl-name" name="name" autocomplete="given-name" placeholder="First name">
 
         <label for="wl-email" class="sr-only">Email address</label>
-        <input type="email" id="wl-email" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="wl-msg">
+        <input type="email" id="wl-email" name="EMAIL" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="wl-msg">
+
+        <!-- Brevo anti-bot honeypot (must stay empty) + locale -->
+        <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="locale" value="en">
 
         <button type="submit" class="btn btn-solid btn-lg btn-block">Join the founding circle</button>
 
