@@ -36,6 +36,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Brevo form base styles (functional; visual is overridden in css/styles.css under .sib-brand) -->
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<style>:where(.sib-form-message-panel){display:none}</style>
+
 <link rel="stylesheet" href="css/styles.css">
 
 <!-- ============================================================
@@ -699,12 +704,8 @@
           <h3 class="quiz-q" data-quiz-result-title>Black Sea Pine Honey</h3>
           <p class="quiz-result-copy" data-quiz-result-copy>A robust, mineral forest honey for depth-seekers.</p>
           <div class="quiz-capture">
-            <label for="quiz-email">Send my recommendation &amp; founding access</label>
-            <div class="field-row">
-              <input type="email" id="quiz-email" name="quiz-email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-              <button type="submit" class="btn btn-solid">Send it</button>
-            </div>
-            <p class="field-note" data-quiz-msg role="status" aria-live="polite"></p>
+            <p>Join the founding circle to lock in early access to your match and every limited harvest.</p>
+            <a class="btn btn-solid" href="#waitlist">Join the founding circle <span aria-hidden="true">→</span></a>
           </div>
           <button type="button" class="link-underline quiz-restart" data-quiz-restart>Start over</button>
         </div>
@@ -851,32 +852,42 @@
     </div>
 
     <div class="waitlist-form-shell" data-reveal>
-      <!-- ============================================================
-           EMAIL CAPTURE — integration-ready.
-           Wire one provider (Klaviyo / Mailchimp / Brevo / ConvertKit)
-           or POST to your own webhook. Double opt-in recommended.
-           Set data-endpoint to your list URL to enable real submits.
-           ============================================================ -->
-      <form class="waitlist-form" data-waitlist data-endpoint="https://16697db2.sibforms.com/serve/MUIFAOk2VWr0KYgImyOyQQcDNhKwZ69u_WqBIrx51rNSdmJvPGCIJ88RZT2dK04Sf4yLBGrK560qohzIBwuTCQ6VVnae4Qi2fihDBcGIvqNW7TSlzZBFkXPZiTcjwwxBqTEvQZxmNCjmv47QzxCLKgExVpTcnMT0Le_ytQypgNYnMPM6d8m6EuOwy-CK0rK0d8Qg61OX31EGjvxpXQ==" novalidate>
-        <label for="wl-name" class="sr-only">First name</label>
-        <input type="text" id="wl-name" name="name" autocomplete="given-name" placeholder="First name">
-
-        <label for="wl-email" class="sr-only">Email address</label>
-        <input type="email" id="wl-email" name="EMAIL" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="wl-msg">
-
-        <!-- Brevo anti-bot honeypot (must stay empty) + locale -->
-        <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="locale" value="en">
-
-        <button type="submit" class="btn btn-solid btn-lg btn-block">Join the founding circle</button>
-
-        <label class="consent-check">
-          <input type="checkbox" name="consent" required>
-          <span>I agree to receive founding updates and accept the <a href="privacy.html">Privacy Policy</a>. Double opt-in — you confirm by email.</span>
-        </label>
-        <p id="wl-msg" class="field-note" data-waitlist-msg role="status" aria-live="polite"></p>
-      </form>
-      <p class="waitlist-fine">No spam, ever. Unsubscribe in one click. We never sell your data.</p>
+      <!-- Brevo signup form (official embed). Functional markup kept; visuals restyled under .sib-brand in css/styles.css. -->
+      <div class="sib-form sib-brand">
+        <div id="sib-form-container" class="sib-form-container">
+          <div id="error-message" class="sib-form-message-panel">
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <span class="sib-form-message-panel__inner-text">We couldn't save your subscription. Please try again.</span>
+            </div>
+          </div>
+          <div id="success-message" class="sib-form-message-panel">
+            <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+              <span class="sib-form-message-panel__inner-text">You're in. Check your inbox to confirm and join the founding circle.</span>
+            </div>
+          </div>
+          <div id="sib-container" class="sib-container--large sib-container--vertical">
+            <form id="sib-form" method="POST" action="https://16697db2.sibforms.com/serve/MUIFAJS7OyMom2WNnLdivxXOaeC_jDK4ST0pvzTas553V_msTDJKHj2q7Iak1TjPT7GUog5xiJD-8umFfaPMq6YCz3vY-9GRHhQXVRJP8cX0roOaWiFUQHdtt70fnSWR-9pkItILybp76MNmal5w8px8rDv122z40h_VOpZ9E0QO_4C_yX9c5HJQYWHV17tCD4vORCQqHngO9TTskA==" data-type="subscription">
+              <div class="sib-input sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <label class="entry__label" for="EMAIL">Email address</label>
+                    <div class="entry__field">
+                      <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="email" placeholder="you@example.com" data-required="true" required />
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary"></label>
+                </div>
+              </div>
+              <div class="sib-form-block">
+                <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">Join the founding circle</button>
+              </div>
+              <input type="text" name="email_address_check" value="" class="input--hidden">
+              <input type="hidden" name="locale" value="en">
+            </form>
+          </div>
+        </div>
+      </div>
+      <p class="waitlist-fine">Double opt-in — you'll confirm by email. No spam, ever; unsubscribe in one click. By joining you accept our <a href="privacy.html">Privacy Policy</a>.</p>
     </div>
   </div>
 </section>
@@ -981,5 +992,22 @@
 </button>
 
 <script src="js/main.js" defer></script>
+
+<!-- Brevo form runtime (handles validation, AJAX submit, success/error states) -->
+<script>
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+  window.LOCALE = 'en';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+  window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank. ";
+  window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+  window.translation = {
+    common: {
+      selectedList: '{quantity} list selected', selectedLists: '{quantity} lists selected',
+      selectedOption: '{quantity} selected', selectedOptions: '{quantity} selected'
+    }
+  };
+  var AUTOHIDE = Boolean(0);
+</script>
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 </body>
 </html>
