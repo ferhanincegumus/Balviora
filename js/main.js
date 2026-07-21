@@ -12,6 +12,11 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
   var raf = window.requestAnimationFrame || function (cb) { return setTimeout(cb, 16); };
 
+  // Email capture (Web3Forms): submissions are emailed to the site owner instantly.
+  var WEB3_URL = 'https://api.web3forms.com/submit';
+  var W3_KEY = '12c1b2e8-f55a-4cf0-b893-d50509719ad3';
+  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
+
   /* ------------------------- Header scroll state ------------------------- */
   var header = $('[data-header]');
   var progress = $('[data-progress] span');
@@ -212,6 +217,7 @@
     var steps = $$('[data-quiz-step]', quiz);
     var bar = $('[data-quiz-bar]', quiz);
     var answers = [];
+    var currentRec = '';
     var results = {
       pine: { title: 'Black Sea Pine Honey', copy: 'A robust, mineral forest honeydew for depth-seekers. Savoury, complex, and rare — the connoisseur\'s choice.' },
       chestnut: { title: 'Black Sea Chestnut Honey', copy: 'Bold, aromatic, and unmistakable, with a characterful bittersweet finish. For those who like an honest, memorable flavour.' },
@@ -244,6 +250,7 @@
           showStep(idx + 1);
         } else {
           var res = results[tally()];
+          currentRec = res.title;
           $('[data-quiz-result-title]', quiz).textContent = res.title;
           $('[data-quiz-result-copy]', quiz).textContent = res.copy;
           showStep('result');
@@ -254,45 +261,70 @@
     var restart = $('[data-quiz-restart]', quiz);
     if (restart) restart.addEventListener('click', function () {
       answers = []; showStep(0);
+      var m = $('[data-quiz-msg]', quiz); if (m) { m.textContent = ''; m.className = 'field-note'; }
+      var em = $('#quiz-email', quiz); if (em) em.value = '';
     });
-    // The quiz result routes to the Brevo waitlist form (single source of email capture);
-    // guard against an accidental form submit.
-    if (qForm) qForm.addEventListener('submit', function (e) { e.preventDefault(); });
+
+    // Quiz email capture → Web3Forms (includes the recommended product).
+    if (qForm) qForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = $('#quiz-email', quiz);
+      var msg = $('[data-quiz-msg]', quiz);
+      var btn = $('[data-quiz-step="result"] button[type="submit"]', quiz);
+      if (!email || !isEmail(email.value)) {
+        if (msg) { msg.textContent = 'Please enter a valid email address.'; msg.className = 'field-note is-err'; }
+        return;
+      }
+      if (msg) { msg.textContent = 'Sending…'; msg.className = 'field-note'; }
+      if (btn) btn.disabled = true;
+      var fd = new FormData();
+      fd.append('access_key', W3_KEY);
+      fd.append('subject', 'New Balviora quiz signup');
+      fd.append('from_name', 'Balviora Website');
+      fd.append('email', email.value.trim());
+      fd.append('recommendation', currentRec || '');
+      fetch(WEB3_URL, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.success) { if (msg) { msg.textContent = 'Sent — your match is on its way. Welcome to the founding circle.'; msg.className = 'field-note is-ok'; } email.value = ''; }
+          else { if (msg) { msg.textContent = (j && j.message) || 'Something went wrong. Please try again.'; msg.className = 'field-note is-err'; } }
+        })
+        .catch(function () { if (msg) { msg.textContent = 'Network error. Please try again.'; msg.className = 'field-note is-err'; } })
+        .then(function () { if (btn) btn.disabled = false; });
+    });
 
     showStep(0);
   }
 
-  /* ------------------------ Waitlist form ------------------------ */
-  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
-
-  var wForm = $('[data-waitlist]');
+  /* ------------------- Waitlist form → Web3Forms ------------------- */
+  var wForm = $('[data-web3form]');
   if (wForm) {
     wForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = $('#wl-email', wForm);
       var consent = wForm.querySelector('input[name="consent"]');
-      var msg = $('[data-waitlist-msg]', wForm);
+      var msg = $('[data-web3-msg]', wForm);
+      var btn = wForm.querySelector('button[type="submit"]');
       if (!isEmail(email.value)) {
         msg.textContent = 'Please enter a valid email address.'; msg.className = 'field-note is-err'; email.focus(); return;
       }
       if (consent && !consent.checked) {
         msg.textContent = 'Please agree to the Privacy Policy to continue.'; msg.className = 'field-note is-err'; return;
       }
-      var endpoint = wForm.getAttribute('data-endpoint');
-      if (endpoint) {
-        // Real submit path (double opt-in handled by your ESP).
-        var data = new FormData(wForm);
-        fetch(endpoint, { method: 'POST', body: data, mode: 'no-cors' })
-          .then(function () { success(); })
-          .catch(function () { msg.textContent = 'Something went wrong. Please try again.'; msg.className = 'field-note is-err'; });
-      } else {
-        success(); // demo mode
-      }
-      function success() {
-        msg.textContent = 'Welcome to the founding circle. Please confirm via the email we just sent.';
-        msg.className = 'field-note is-ok';
-        wForm.reset();
-      }
+      msg.textContent = 'Sending…'; msg.className = 'field-note';
+      if (btn) btn.disabled = true;
+      fetch(WEB3_URL, { method: 'POST', body: new FormData(wForm), headers: { 'Accept': 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.success) {
+            msg.textContent = 'Welcome to the founding circle — you\'re on the list.'; msg.className = 'field-note is-ok';
+            wForm.reset();
+          } else {
+            msg.textContent = (j && j.message) || 'Something went wrong. Please try again.'; msg.className = 'field-note is-err';
+          }
+        })
+        .catch(function () { msg.textContent = 'Network error. Please try again.'; msg.className = 'field-note is-err'; })
+        .then(function () { if (btn) btn.disabled = false; });
     });
   }
 
