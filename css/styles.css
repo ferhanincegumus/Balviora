@@ -491,51 +491,6 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(22
 .consent-check a{color:var(--honey-light);text-decoration:underline}
 .waitlist-fine{margin-top:1.2rem;font-size:.8rem;color:rgba(243,238,227,.55)}
 .waitlist-fine a{color:var(--honey-light);text-decoration:underline}
-
-/* ---- Brevo embedded form, restyled to the Balviora theme ---- */
-.sib-brand,.sib-brand *{font-family:var(--sans)!important;box-sizing:border-box}
-.sib-brand{background:transparent!important;text-align:left!important}
-/* self-sufficient layout so the form renders correctly even if Brevo's base CSS is slow/blocked */
-.sib-brand #sib-form,.sib-brand .sib-form-block,.sib-brand .sib-input,
-.sib-brand .form__entry,.sib-brand .form__label-row,.sib-brand .entry__field{display:block!important;width:100%!important}
-.sib-brand #sib-form-container,.sib-brand #sib-form{max-width:none!important;padding:0!important}
-.sib-brand #sib-container{
-  background:transparent!important;border:0!important;max-width:none!important;
-  padding:0!important;text-align:left!important;
-}
-.sib-brand .sib-form-block{padding:0 0 1rem!important;text-align:left!important}
-.sib-brand .sib-input{padding-bottom:1rem!important}
-.sib-brand .entry__label{
-  display:block!important;color:rgba(243,238,227,.82)!important;
-  font-weight:500!important;font-size:.9rem!important;margin-bottom:.5rem!important;
-}
-.sib-brand .input{
-  width:100%!important;height:auto!important;padding:.95rem 1.1rem!important;
-  border:1px solid var(--line)!important;border-radius:var(--radius)!important;
-  font-size:1rem!important;color:var(--ink)!important;background:rgba(250,247,240,.96)!important;
-  box-shadow:none!important;
-}
-.sib-brand .input:focus{border-color:var(--honey)!important;box-shadow:0 0 0 3px rgba(224,180,88,.18)!important;outline:none!important}
-.sib-brand .input::placeholder{color:var(--stone-2)!important}
-.sib-brand .entry__specification{display:none!important}
-.sib-brand .input--hidden,.sib-brand input[name="email_address_check"]{display:none!important}
-.sib-brand .sib-form-block__button{
-  width:100%!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  padding:1.05rem 2rem!important;border:0!important;border-radius:100px!important;cursor:pointer!important;
-  background:var(--honey)!important;color:var(--forest)!important;
-  font-weight:500!important;font-size:1rem!important;letter-spacing:.01em!important;
-  transition:background .3s var(--ease),transform .3s var(--ease)!important;
-}
-.sib-brand .sib-form-block__button:hover{background:var(--honey-light)!important;transform:translateY(-2px)}
-.sib-brand .sib-form-block:last-of-type{padding-bottom:0!important}
-.sib-brand .entry__error{
-  color:#E8A08E!important;background:transparent!important;border:0!important;
-  font-size:.85rem!important;padding:.3rem 0 0!important;
-}
-.sib-brand .sib-form-message-panel{
-  max-width:none!important;margin-bottom:1rem!important;border-radius:10px!important;
-  font-size:.92rem!important;
-}
 .waitlist-form-shell .field-note.is-ok{color:var(--honey-glow)}
 .waitlist-form-shell .field-note.is-err{color:#E8A08E}
 
